@@ -16,6 +16,11 @@ class ProductController extends Controller
         //
     }
 
+    public function solde()
+    {
+        return view('users.solde.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
