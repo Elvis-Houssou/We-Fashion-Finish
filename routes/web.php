@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
@@ -20,9 +21,9 @@ Route::prefix('/')->group(function () {
     Route::match(['get', 'post'], '/', [ProductController::class, 'solde'])->name('solde');
 
     // Route::get('/solde', [ProductController::class, 'solde'])->name('solde');
-    // Route::get('/homme', [ProductController::class, 'homme'])->name('homme');
-    // Route::get('/femme', [ProductController::class, 'femme'])->name('femme');
-    // Route::match(['get', 'post'], '/{id}', [ProductController::class, 'show'])->name('show');
+    Route::get('/homme', [ProductController::class, 'homme'])->name('homme');
+    Route::get('/femme', [ProductController::class, 'femme'])->name('femme');
+    Route::match(['get', 'post'], 'show/{id}', [ProductController::class, 'show'])->name('show');
 });
 
 // Route::get('/', function () {
@@ -30,17 +31,27 @@ Route::prefix('/')->group(function () {
 // });
 
 Route::prefix('/')->group(function () {
-    Route::match(['get', 'post'], '/admin', [AdminController::class, 'produit'])->name('admin');
-    Route::match(['get', 'post'], '/admin/catégorie', [AdminController::class, 'category'])->name('admin');
-    // Route::get('/admin/catégories', [AdminController::class, 'categories'])->name('categories');
-    Route::match(['get', 'post'], '/admin/create', [AdminController::class, 'create'])->name('create');
-    Route::match(['get', 'post'], '/admin/edit/{id}', [AdminController::class, 'edit'])->name('edit');
-    // Route::match(['get', 'post'], '/admin/create/', [ProductController::class, 'store'])->name('create');
-    // Route::post('/admin/create/store', [ProductController::class, 'store'])->name('store');
+    Route::match(['get', 'post'], '/admin', [AdminController::class, 'produit'])->name('product');
+    Route::match(['get', 'post'], '/admin/catégorie', [AdminController::class, 'category'])->name('category');
 
-    Route::post('/admin/create', [ProductController::class, 'store'])->name('store');
-    Route::post('/admin/edit/{id}', [ProductController::class, 'update'])->name('update');
-    Route::delete('/admin/delete/{id}', [ProductController::class, 'destroy'])->name('destroy');
+    Route::match(['get', 'post'], '/admin/product/create', [AdminController::class, 'createProduct'])->name('createProduct');
+    Route::match(['get', 'post'], '/admin/categorie/create', [AdminController::class, 'createCategory'])->name('createCategory');
+    Route::match(['get', 'post'], '/admin/edit/product/{id}', [AdminController::class, 'editProduct'])->name('editProduct');
+    Route::match(['get', 'post'], '/admin/edit/catégorie/{id}', [AdminController::class, 'editCategory'])->name('editCategory');
+    // Route::match(['get', 'post'], '/admin/create/', [ProductController::class, 'store'])->name('create');
+
+
+    //? Store
+    Route::post('/admin/product/store', [ProductController::class, 'storeProduct'])->name('storeProduct');
+    Route::post('/admin/category/store', [CategoryController::class, 'storeCategory'])->name('storeCategory');
+
+    //? Update
+    Route::post('/admin/product/update/{id}', [ProductController::class, 'updateProduct'])->name('updateProduct');
+    Route::post('/admin/category/update/{id}', [CategoryController::class, 'updateCategory'])->name('updateCategory');
+
+    //? Delete
+    Route::delete('/admin/product/delete/{id}', [ProductController::class, 'destroyProduct'])->name('destroyProduct');
+    Route::delete('/admin/category/delete/{id}', [CategoryController::class, 'destroyCategory'])->name('destroyCategory');
 })->middleware(['auth', 'verified']);
 
 // Route::get('/dashboard', function () {

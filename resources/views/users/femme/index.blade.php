@@ -18,9 +18,9 @@
 
 
                         @if ($product->category_id == 1)
-                            <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{url('images/hommes/'.$product->images) }}" alt="">
+                            <img class="bd-placeholder-img card-img-top" width="100%" height="400" src="{{url('images/hommes/'.$product->images) }}" alt="">
                         @else
-                            <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{url('images/femmes/'.$product->images) }}" alt="">
+                            <img class="bd-placeholder-img card-img-top" width="100%" height="400" src="{{url('images/femmes/'.$product->images) }}" alt="">
 
                         @endif
 
