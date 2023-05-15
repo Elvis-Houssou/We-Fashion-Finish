@@ -51,8 +51,11 @@
             @endforeach
         </table>
 
-        <div class="w-25 p-3">
+        {{-- <div class="w-25 p-3"> --}}
             {{-- {{ $categories->links() }} --}}
+        {{-- </div> --}}
+        <div class="d-flex flex-row-reverse">
+            {{ $categories->links("pagination::bootstrap-5") }}
         </div>
     </div>
 @endsection

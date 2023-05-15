@@ -20,7 +20,7 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $file = Storage::files('public/images');
+        $file = File::files('public/images/');
         $fKey = Category::pluck('id');
 
 

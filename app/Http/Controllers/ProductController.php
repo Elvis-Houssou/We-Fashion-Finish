@@ -16,21 +16,21 @@ class ProductController extends Controller
 
     public function solde()
     {
-        $products = Product::with('categories')->where('state', "En solde")->inRandomOrder()->paginate(6);
+        $products = Product::with('categories')->where('state', "En solde")->paginate(6);
 
         return view('users.solde.index', compact('products'));
     }
 
     public function homme()
     {
-        $products = Product::with('categories')->where('category_id', 1)->inRandomOrder()->paginate(6);
+        $products = Product::with('categories')->where('category_id', 1)->paginate(6);
 
         return view('users.homme.index', compact('products'));
     }
 
     public function femme()
     {
-        $products = Product::with('categories')->where('category_id', 2)->inRandomOrder()->paginate(6);
+        $products = Product::with('categories')->where('category_id', 2)->paginate(6);
         // $products = ProductResource::collection(Product::with('categories:name'))->where('visibility', 'Publié')->inRandomOrder()->paginate(6);
 
         return view('users.femme.index', compact('products'));
