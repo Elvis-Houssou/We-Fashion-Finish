@@ -14,15 +14,16 @@
                 <div class="col">
 
                     <div class="card shadow-sm">
-                    {{-- <img class="bd-placeholder-img card-img-top" width="100%" height="225" src=" {{ $product->images}} " alt=""> --}}
-
-
-                        @if ($product->category_id == 1)
-                            <img class="bd-placeholder-img card-img-top" width="100%" height="400" src="{{url('images/hommes/'.$product->images) }}" alt="">
+                        {{-- @if ($product->category_id == 1)
+                            <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{url('images/hommes/'.$product->images) }}" alt="">
                         @else
-                            <img class="bd-placeholder-img card-img-top" width="100%" height="400" src="{{url('images/femmes/'.$product->images) }}" alt="">
+                            <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{url('images/femmes/'.$product->images) }}" alt="">
 
-                        @endif
+                        @endif --}}
+
+
+                        <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{url('images/'.$product->images) }}" alt="">
+
 
                         <a href="{{route('show', $product->id)}}">
                             <div class="card-body">
@@ -40,8 +41,8 @@
 
             </div><br>
 
-            <div >
-            {{ $products->links() }}
+            <div class="d-flex flex-row-reverse">
+                {{ $products->links("pagination::bootstrap-5") }}
             </div>
         </div>
     </div>

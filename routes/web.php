@@ -19,18 +19,16 @@ use App\Http\Controllers\ProfileController;
 
 Route::prefix('/')->group(function () {
     Route::match(['get', 'post'], '/', [ProductController::class, 'solde'])->name('solde');
-
-    // Route::get('/solde', [ProductController::class, 'solde'])->name('solde');
     Route::get('/homme', [ProductController::class, 'homme'])->name('homme');
     Route::get('/femme', [ProductController::class, 'femme'])->name('femme');
     Route::match(['get', 'post'], 'show/{id}', [ProductController::class, 'show'])->name('show');
 });
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-Route::prefix('/')->group(function () {
     Route::match(['get', 'post'], '/admin', [AdminController::class, 'produit'])->name('product');
     Route::match(['get', 'post'], '/admin/catégorie', [AdminController::class, 'category'])->name('category');
 
@@ -38,7 +36,6 @@ Route::prefix('/')->group(function () {
     Route::match(['get', 'post'], '/admin/categorie/create', [AdminController::class, 'createCategory'])->name('createCategory');
     Route::match(['get', 'post'], '/admin/edit/product/{id}', [AdminController::class, 'editProduct'])->name('editProduct');
     Route::match(['get', 'post'], '/admin/edit/catégorie/{id}', [AdminController::class, 'editCategory'])->name('editCategory');
-    // Route::match(['get', 'post'], '/admin/create/', [ProductController::class, 'store'])->name('create');
 
 
     //? Store
@@ -52,16 +49,6 @@ Route::prefix('/')->group(function () {
     //? Delete
     Route::delete('/admin/product/delete/{id}', [ProductController::class, 'destroyProduct'])->name('destroyProduct');
     Route::delete('/admin/category/delete/{id}', [CategoryController::class, 'destroyCategory'])->name('destroyCategory');
-})->middleware(['auth', 'verified']);
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';

@@ -8,11 +8,7 @@
             <div class="container">
                 <div class="row s_product_inner">
                     <div class="col-lg-4 ">
-                        @if ($product->category_id == 1)
-                            <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{url('images/hommes/'.$product->images) }}" alt="">
-                        @else
-                            <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{url('images/femmes/'.$product->images) }}" alt="">
-                        @endif
+                        <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{url('images/'.$product->images) }}" alt="">
                     </div>
                     <div class="col-lg-5 offset-lg-1">
                         <div class="s_product_text">

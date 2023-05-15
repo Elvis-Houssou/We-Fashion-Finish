@@ -9,27 +9,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+// use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
 
     public function solde()
     {
-        $products = Product::with('categories')->where('state', "En solde")->where('visibility', 'Publié')->inRandomOrder()->paginate(6);
+        $products = Product::with('categories')->where('state', "En solde")->inRandomOrder()->paginate(6);
 
         return view('users.solde.index', compact('products'));
     }
 
     public function homme()
     {
-        $products = Product::with('categories')->where('category_id', 1)->where('visibility', 'Publié')->inRandomOrder()->paginate(6);
+        $products = Product::with('categories')->where('category_id', 1)->inRandomOrder()->paginate(6);
 
         return view('users.homme.index', compact('products'));
     }
 
     public function femme()
     {
-        $products = Product::with('categories')->where('category_id', 2)->where('visibility', 'Publié')->inRandomOrder()->paginate(6);
+        $products = Product::with('categories')->where('category_id', 2)->inRandomOrder()->paginate(6);
+        // $products = ProductResource::collection(Product::with('categories:name'))->where('visibility', 'Publié')->inRandomOrder()->paginate(6);
 
         return view('users.femme.index', compact('products'));
     }
@@ -66,13 +68,10 @@ class ProductController extends Controller
         $images = $request->file('images');
         $filename = Str::uuid()->toString(). "." . $images->getClientOriginalExtension();
 
-        if ($request->input('category_id') == 1 && $request->hasFile('images')) {
-            $images->move('images/hommes', $filename);
+        if ($request->hasFile('images')) {
+            $images->move('images', $filename);
             $results['images'] = $filename;
 
-        }else {
-            $images->move('images/femmes', $filename);
-            $results['images'] = $filename;
         }
 
         $product = new Product;
@@ -93,26 +92,24 @@ class ProductController extends Controller
     {
         $request = request();
         $categorie = Category::find($request->input('category_id'));
+        $size = implode(',', $request->input('size'));
+
 
 
         $results = $request->all();
+        $results['size'] = $size;
+
 
         $images = $request->file('images');
         $filename = Str::uuid()->toString(). "." . $images->getClientOriginalExtension();
 
         if ($request->hasFile('images')) {
-            if ($request->input('category_id') == 1 ) {
-                Storage::delete('app/public/images/hommes' . $product->image);
+                Storage::delete('images' . $product->image);
 
-                $images->move(storage_path('app/public/images/hommes'), $filename);
+                // $images->move(storage_path('app/public/images'), $filename);
+                $images->move('images', $filename);
+
                 $results['images'] = $filename;
-
-            }else if ($request->input('category_id') == 2 ) {
-                Storage::delete('app/public/images/femmes' . $product->image);
-
-                $images->move(storage_path('app/public/images/femmes'), $filename);
-                $results['images'] = $filename;
-            }
         }else{
             $product->image = $request->input('old_image');
         }

@@ -63,8 +63,8 @@
 
             <div class="mb-3">
                 <select name="visibility" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <option name="state" value="En solde" {{$product->visibility == "Publié" ? 'selected' : "" }}>Publié</option>
-                    <option name="state" value="En solde" {{$product->visibility == "Non publié" ? 'selected' : "" }}>Non publié</option>
+                    <option name="state" value="Publié" {{$product->visibility == "Publié" ? 'selected' : "" }}>Publié</option>
+                    <option name="state" value="Non publié" {{$product->visibility == "Non publié" ? 'selected' : "" }}>Non publié</option>
                 </select>
             </div>
 
