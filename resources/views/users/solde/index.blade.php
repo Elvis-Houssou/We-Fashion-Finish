@@ -14,17 +14,15 @@
                 <div class="col">
 
                     <div class="card shadow-sm">
-                        {{-- <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{asset('storage/'.$product->images) }}" alt=""> --}}
-                        {{-- <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{url('storage/app/' .$product->images) }}" alt=""> --}}
 
-                        {{-- <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{ asset('storage/app/' . $product->images) }}" alt=""> --}}
-                        {{-- <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{url('images/'.$product->images) }}" alt=""> --}}
-                        <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{asset('images/'.$product->images) }}" alt="">
+                        @if ($product->category_id == 1)
+                            <img class="bd-placeholder-img card-img-top" src="{{asset('storage/images/hommes/'.$product->images) }}" alt="" width="100%" height="400px">
+                        @else
+                            <img class="bd-placeholder-img card-img-top" src="{{asset('storage/images/femmes/'.$product->images) }}" alt="" width="100%" height="400px">
 
-
-
-
-                        <a href="{{route('show', $product->id)}}">
+                        @endif
+                        {{-- <img class="bd-placeholder-img card-img-top" width="100%" height="400px" src="{{asset('storage/images/' .$product->images) }}" alt=""> --}}
+                        <a href="{{route('show', $product->id)}}" class="nav-link">
                             <div class="card-body">
                                 <h2 class="card-text"> {{$product->name}} </h2>
                                 <div class="d-flex justify-content-between align-items-center">

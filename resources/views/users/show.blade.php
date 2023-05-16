@@ -30,7 +30,7 @@
 
                                     @endphp
                                     @foreach ($new as $news)
-                                    <option value="M">{{$news}}</option>
+                                    <option>{{$news}}</option>
 
                                     @endforeach
                                     {{-- <option value="L">L</option> --}}

@@ -65,12 +65,21 @@ class ProductController extends Controller
 
         // dd($results);
 
-        $images = $request->file('images');
-        $filename = Str::uuid()->toString(). "." . $images->getClientOriginalExtension();
 
         if ($request->hasFile('images')) {
-            $images->move('images', $filename);
-            $results['images'] = $filename;
+            if ($request->input('category_id') == 1) {
+                $images = $request->file('images');
+                $filename = Str::uuid()->toString(). "." . $images->getClientOriginalExtension();
+                $storage = public_path('storage/images/hommes');
+                $images->move($storage, $filename);
+                $results['images'] = $filename;
+            }else{
+                $images = $request->file('images');
+                $filename = Str::uuid()->toString(). "." . $images->getClientOriginalExtension();
+                $storage = public_path('storage/images/femmes');
+                $images->move($storage, $filename);
+                $results['images'] = $filename;
+            }
 
         }
 
@@ -106,10 +115,23 @@ class ProductController extends Controller
         if ($request->hasFile('images')) {
                 Storage::delete('images' . $product->image);
 
+                if ($request->input('category_id') == 1) {
+                    $images = $request->file('images');
+                    $filename = Str::uuid()->toString(). "." . $images->getClientOriginalExtension();
+                    $storage = public_path('storage/images/hommes');
+                    $images->move($storage, $filename);
+                    $results['images'] = $filename;
+                }else{
+                    $images = $request->file('images');
+                    $filename = Str::uuid()->toString(). "." . $images->getClientOriginalExtension();
+                    $storage = public_path('storage/images/femmes');
+                    $images->move($storage, $filename);
+                    $results['images'] = $filename;
+                }
                 // $images->move(storage_path('app/public/images'), $filename);
-                $images->move('images', $filename);
+                // $images->move('images', $filename);
 
-                $results['images'] = $filename;
+                // $results['images'] = $filename;
         }else{
             $product->image = $request->input('old_image');
         }

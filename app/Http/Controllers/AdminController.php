@@ -22,7 +22,7 @@ class AdminController extends Controller
      */
     public function category()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(15);
         return view('admin.categories.index', compact('categories'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
