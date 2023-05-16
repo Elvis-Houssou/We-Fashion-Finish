@@ -7,7 +7,7 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://kit.fontawesome.com/5c3f06488c.css" crossorigin="anonymous">
+        {{-- <link rel="stylesheet" href="https://kit.fontawesome.com/5c3f06488c.css" crossorigin="anonymous"> --}}
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -17,8 +17,8 @@
     </head>
     <body class="antialiased">
         <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex align-items-center" data-bs-theme="dark" >
-            <div class="container-fluid d-flex align-items-center">
-                <h3 class="text-center" style="color: #66EB9A; margin-left: 50px;">We -  Fashion</h3>
+            <div class="container container-fluid d-flex align-items-center">
+                <h3 class="text-center" style="color: #66EB9A;">We -  Fashion</h3>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
